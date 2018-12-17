@@ -283,25 +283,24 @@ void UbicacionInicial(int *PosHA,int *PosVA,int *PosHB,int *PosVB,int *PosHC,int
 ///_____________________MOVIMIENTO________________________
 
 void Moverse(struct Personaje *PE, int *PosHA,int *PosVA,int *PosHB,int *PosVB,int *PosHC,int *PosVC, int *PosHD,int *PosVD){
-    int i, j,x,y;
-    int VerifLetra;
-    int Z, Bandera1, Bandera2;
+    int i, j,x,Z,VerifLetra;
     char W;
-    int inicioH = *PosHA;
-    int inicioV = *PosVA;
     char letras[21] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','\0'};
     char A = 65;
     char B = 66;
     char C = 67;
     char D = 68;
     char ch =176;
-        printf("Se reduciran sus puntos de accion, en un punto por cada cuadro de distancia.\nSus puntos de Accion actuales son: %d\n",Personaje[1].PtAccion);
-        printf("Presione un numero para continuar\n");
+    char ef = 178;
+   system("cls");
+   UbicacionInicial(&(*PosHA),&(*PosVA),&(*PosHB),&(*PosVB),&(*PosHC),&(*PosVC),&(*PosHD),&(*PosVD));
+    int inicioH = *PosHA;
+    int inicioV = *PosVA;
+        printf("Se reduciran sus puntos de accion, en un punto por cada cuadro de disstancia.\nSus puntos de Accion actuales son: %d\n",Personaje[1].PtAccion);
+        printf("Presione un numero para continuar:\n");
         scanf("%d",&x);
-        /*system("cls");*/
         printf("\n");
-                                        /*Personaje[1].PtAccion = Personaje[1].PtAccion - 1;*/
-                                        /*  UbicacionInicial(&PosHA,&PosVA,&PosHB,&PosVB,&PosHC,&PosVC,&PosHD,&PosVD);*/
+
         do{
             printf("\Ingrese coordenadas:\n");
             printf("Ingrese Letra: ");
@@ -310,7 +309,7 @@ void Moverse(struct Personaje *PE, int *PosHA,int *PosVA,int *PosHB,int *PosVB,i
             for(j=0; j<21; j++){
                 if(W != letras[j]) VerifLetra = 0;
                 else{ VerifLetra = 1;
-                    *PosVA=j;
+                    *PosVA = j;
                     j=21;
                 }
             }
@@ -335,8 +334,8 @@ void Moverse(struct Personaje *PE, int *PosHA,int *PosVA,int *PosHB,int *PosVB,i
                         VerifLetra =0;
                     }
                 }while(VerifLetra==0);
-        
-    if(Personaje[1].PtAccion > DeterminaMovimieinto(&PE,&PosHA,&PosVA,&PosHB,&PosVB,&PosHC,&PosVC,&PosHD,&PosVD,inicioH,inicioV)){                                              /*     system("cls");*/
+                system("cls");
+   if(Personaje[1].PtAccion >= DeterminaMovimieinto(&PE,&PosHA,&PosVA,&PosHB,&PosVB,&PosHC,&PosVC,&PosHD,&PosVD,inicioH,inicioV)){                                              /*     system("cls");*/
       printf("   A B C D E F G H I J K L M N O P Q R S T");
       printf("\n");
       printf("|------------------------------------------|");
@@ -350,34 +349,48 @@ void Moverse(struct Personaje *PE, int *PosHA,int *PosVA,int *PosHB,int *PosVB,i
                if(i==*PosHC && j==*PosVC) printf("%c ",C);
                if(i==*PosHD && j==*PosVD) printf("%c ",D);
             }
-                                    /* if((i==y && j ==x) || (i==3 && j==0) || (i==0 && j==4) || (i==3 && j==4)){
-                                       if(i==y && j==x) printf("%c ",A);
-                                       if(i==3 && j==0) printf("%c ",B);
-                                       if(i==0 && j==4) printf("%c ",C);
-                                       if(i==3 && j==4) printf("%c ",D);   ESTA ES LA ORIGINAL}*/
             else printf("%c ",ch);
         }
         printf("\n");
-  /*   printf("|------------------------------------------|");
-           printf("\n");*/
       }
-    int SustiHA;
-    int SustiVA;
-    SustiHA = *PosHA;
-    SustiVA = *PosVA;
-    printf("\nSustiHA = %d",SustiHA);
-    printf("\nSustiVA = %d",SustiVA);
+    /* moverse(&PE,3,4);*/
+        int SustiHA;
+        int SustiVA;
+        SustiHA = *PosHA;
+        SustiVA = *PosVA;
+        printf("\nSustiHA = %d\n",SustiHA);
+        printf("\nSustiVA = %d\n",SustiVA);
 
         Personaje[1].PtAccion = Personaje[1].PtAccion - DeterminaMovimieinto(&PE,&PosHA,&PosVA,&PosHB,&PosVB,&PosHC,&PosVC,&PosHD,&PosVD,inicioH,inicioV);
-        printf("\nSe mueve: %d",DeterminaMovimieinto(&PE,&PosHA,&PosVA,&PosHB,&PosVB,&PosHC,&PosVC,&PosHD,&PosVD,inicioH,inicioV));
-        printf("\nPuntos de accion restantes: %d",Personaje[1].PtAccion);
-        printf("\nPresiona un numero para volver al menu");
+        printf("\nSe mueve: %d\n",DeterminaMovimieinto(&PE,&PosHA,&PosVA,&PosHB,&PosVB,&PosHC,&PosVC,&PosHD,&PosVD,inicioH,inicioV));
+        printf("\nPuntos de accion restantes: %d\n",Personaje[1].PtAccion);
+        printf("\nPresiona un numero para volver al menu:");
         scanf("%d",&x);
         Menu("\nOpciones");
      return;
     }else{
-        printf("\nNo tienes suficientes puntos de accion para realizar un movimiento\n");
-        printf("\nPresiona un numero para volver al menu");
+        system("cls");
+         printf("   A B C D E F G H I J K L M N O P Q R S T");
+      printf("\n");
+      printf("|------------------------------------------|");
+      printf("\n");
+      for(i = 0; i < 10; i++){
+        printf("| %d", i);
+        for(j = 0; j < 20; j++){
+            if((i==inicioH && j ==inicioV) || (i==*PosHB && j==*PosVB) || (i==*PosHC && j==*PosVC) || (i==*PosHD && j==*PosVD)){
+               if(i==inicioH && j==inicioV) printf("%c ",A);
+               if(i==*PosHB && j==*PosVB) printf("%c ",B);
+               if(i==*PosHC && j==*PosVC) printf("%c ",C);
+               if(i==*PosHD && j==*PosVD) printf("%c ",D);
+            }
+            else printf("%c ",ch);
+        }
+        printf("\n");
+      }
+        *PosHA = inicioH;
+        *PosVA = inicioV;
+        printf("\nNo tienes suficientes puntos de accion para realizar este movimiento\n");
+        printf("\nPresiona un numero para volver al menu:");
         scanf("%d",&x);
         Menu("\nOpciones");
         return;
